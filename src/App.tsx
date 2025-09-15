@@ -247,6 +247,17 @@ ${input}`,
           </section>
         )}
       </main>
+      <footer>
+        &copy;{new Date().getFullYear()} PlanttGPT. With ❤️ by{" "}
+        <a
+          href="https://github.com/plushexe351"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ushnish Tapaswi
+        </a>{" "}
+        | <a href="https://github.com/plushexe351/planttgpt">View Source</a>
+      </footer>
     </div>
   );
 }
