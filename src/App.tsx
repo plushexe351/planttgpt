@@ -83,9 +83,15 @@ function App() {
         role: "user",
         parts: [
           {
-            text: `Convert this into valid PlantUML code. 
-Only output PlantUML, nothing else.
-${input}`,
+            text: `Convert this natural language user query into valid PlantUML code (use your creativity if the query is too vague).
+          Strict rules:
+          - Only return PlantUML between @startuml and @enduml.
+          - No markdown, no comments, no annotations, no explanations.
+          - Associations must use PlantUML syntax only.
+          - Do not add ">" at the end of relationships.
+          - Put methods on their own line inside classes.
+
+          user query : ${input}`,
           },
         ],
       },
@@ -102,10 +108,22 @@ ${input}`,
         if (chunk.text) collected += chunk.text;
       }
 
-      const cleaned = collected
+      // sanitize AI output
+      let cleaned = collected
         .replace(/```plantuml/g, "")
         .replace(/```/g, "")
+        // kill stray >
+        .replace(/>+/g, "")
+        // kill stray single-quote comments
+        .replace(/'[^"\n]*/g, "")
+        // collapse empty lines
+        .replace(/\n\s*\n/g, "\n")
         .trim();
+
+      cleaned = cleaned.replace(
+        /(\+\s*[a-zA-Z0-9_]+:[^\n]+)(\+.*\()/g,
+        "$1\n$2"
+      );
 
       if (!cleaned.includes("@startuml") || !cleaned.includes("@enduml")) {
         throw new Error("Gemini did not return valid PlantUML");
