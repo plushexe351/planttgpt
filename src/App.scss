@@ -23,8 +23,8 @@
 
 /* Dark mode variables (manual class toggle) */
 .dark {
-  --bg: #0f1115;
-  --card-bg: #1a1c23;
+  --bg: #000000;
+  --card-bg: #000000;
   --text: #f3f4f6;
   --muted: #9ca3af;
   --border: #2d2f36;
@@ -44,13 +44,15 @@ body {
 .app {
   font-family: "Inter", sans-serif;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 1rem 2rem;
   color: var(--text);
   transition: background 0.3s, color 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: start;
-
+  @media screen and (max-width: 500px) {
+    padding: 1rem;
+  }
   main {
     display: flex;
     justify-content: center;
@@ -58,6 +60,9 @@ body {
     gap: 1rem;
     width: 100%;
     flex-wrap: wrap;
+    @media screen and (max-width: 500px) {
+      gap: 0.5rem;
+    }
     section {
       flex: 1;
       max-width: 100%;
@@ -73,13 +78,18 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-
     h1 {
       font-size: 1.75rem;
       font-weight: 600;
       display: flex;
       justify-content: center;
       align-items: center;
+      @media screen and (max-width: 500px) {
+        font-size: 1.5rem;
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 1.3rem;
+      }
       img {
         height: 40px;
         width: 40px;
@@ -89,6 +99,19 @@ body {
     p {
       color: var(--muted);
       margin-top: 0.5rem;
+      @media screen and (max-width: 500px) {
+        font-size: 0.8rem;
+      }
+    }
+
+    .theme-selector {
+      position: absolute;
+      right: 0.5rem;
+      top: 0;
+      @media screen and (max-width: 500px) {
+        font-size: 0.7rem;
+        width: 70px;
+      }
     }
   }
 }
@@ -114,8 +137,6 @@ select {
 }
 /* Cards */
 .card {
-  // max-width: 90vw;
-  // max-width: 500px;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
@@ -248,81 +269,79 @@ select {
   }
 }
 
-/* Dark mode via system preference */
-@media (prefers-color-scheme: dark) {
-  .app {
-    background: #0f1115;
-    color: #f3f4f6;
+// /* Dark mode via system preference */
+// @media (prefers-color-scheme: dark) {
+//   .app {
+//     background: #0f1115;
+//     color: #f3f4f6;
 
-    .app-header p {
-      color: #9ca3af;
-    }
+//     .app-header p {
+//       color: #9ca3af;
+//     }
 
-    select {
-      background: #1a1c23;
-      border-color: #2d2f36;
-      color: #f3f4f6;
+//     select {
+//       background: #1a1c23;
+//       border-color: #2d2f36;
+//       color: #f3f4f6;
 
-      &:hover {
-        border-color: var(--primary);
-      }
-    }
-  }
+//       &:hover {
+//         border-color: var(--primary);
+//       }
+//     }
+//   }
 
-  .card {
-    background: #1a1c23;
-    border-color: #2d2f36;
-    color: #f3f4f6;
+//   .card {
+//     background: #1a1c23;
+//     border-color: #2d2f36;
+//     color: #f3f4f6;
 
-    textarea,
-    input {
-      background: #0f1115;
-      border-color: #2d2f36;
-      color: #f3f4f6;
+//     textarea,
+//     input {
+//       background: #0f1115;
+//       border-color: #2d2f36;
+//       color: #f3f4f6;
 
-      &::placeholder {
-        color: #9ca3af;
-      }
-    }
+//       &::placeholder {
+//         color: #9ca3af;
+//       }
+//     }
 
-    button:disabled {
-      background: #9ca3af;
-    }
+//     button:disabled {
+//       background: #9ca3af;
+//     }
 
-    .field-row button {
-      background: var(--primary);
-      color: white;
+//     .field-row button {
+//       background: var(--primary);
+//       color: white;
 
-      &:hover {
-        background: var(--primary-hover);
-      }
-    }
-  }
+//       &:hover {
+//         background: var(--primary-hover);
+//       }
+//     }
+//   }
 
-  .settings-toggle button {
-    background: #1a1c23;
-    border: 1px solid #2d2f36;
-    color: #f3f4f6;
+//   .settings-toggle button {
+//     background: #1a1c23;
+//     border: 1px solid #2d2f36;
+//     color: #f3f4f6;
 
+//     &:hover {
+//       background: var(--primary);
+//       color: white;
+//       border-color: var(--primary);
+//     }
+//   }
+
+footer {
+  text-align: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  color: rgb(137, 137, 137);
+  font-size: 0.8rem;
+  a {
+    color: var(--primary);
     &:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-  }
-  footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: auto;
-    color: rgb(137, 137, 137);
-    font-size: 0.8rem;
-    a {
-      color: var(--primary);
-      &:hover {
-        color: var(--primary-hover);
-      }
+      color: var(--primary-hover);
     }
   }
 }

@@ -135,6 +135,16 @@ ${input}`,
             </h1>
             <p>Turn plain English into UML diagrams using Gemini 2.0 Flash</p>
           </div>
+          <select
+            name="theme"
+            className="theme-selector"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value as Theme)}
+          >
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="system">System</option>
+          </select>
         </div>
       </header>
 
